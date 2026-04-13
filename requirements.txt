@@ -1,0 +1,12 @@
+torch
+torchvision
+transformers
+streamlit
+opencv-python-headless
+numpy
+pandas
+Pillow
+albumentations
+editdistance
+pytest
+flake8
