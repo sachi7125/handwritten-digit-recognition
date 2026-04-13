@@ -1,7 +1,4 @@
 import torch
-
-def load_crnn(weights_path: str, device: str = "cpu"):
-    import torch
 import torch.nn as nn
 
 class CRNN(nn.Module):
@@ -26,5 +23,10 @@ class CRNN(nn.Module):
         rnn_out,_ = self.rnn(conv)
         out = self.fc(rnn_out)
         return out.permute(1,0,2)
-    model = None
+
+
+def load_crnn(weights_path: str, device: str = "cpu"):
+    model = CRNN().to(device)
+    model.load_state_dict(torch.load(weights_path, map_location=device))
+    model.eval()
     return model
