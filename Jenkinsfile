@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
+        stage('Install & Test') {
             steps {
-                sh 'pip install -r requirements.txt'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'PYTHONPATH=. pytest -q'
+                sh '''
+                docker run --rm \
+                -v $(pwd):/app \
+                -w /app \
+                python:3.10-slim \
+                sh -c "pip install -r requirements.txt && PYTHONPATH=. pytest -q"
+                '''
             }
         }
 
