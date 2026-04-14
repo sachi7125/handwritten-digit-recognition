@@ -17,4 +17,4 @@ COPY models/ ./models/
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "app/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["sh", "-c", "PYTHONPATH=. streamlit run app/streamlit_app.py --server.port=8501 --server.address=0.0.0.0"]
