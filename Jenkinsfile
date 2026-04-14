@@ -13,7 +13,7 @@ pipeline {
                 -v $WORKSPACE:/app \
                 -w /app \
                 python:3.10-slim \
-                sh run_tests.sh
+                sh /app/run_tests.sh
                 '''
             }
         }
