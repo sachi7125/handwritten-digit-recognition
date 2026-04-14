@@ -6,10 +6,10 @@ pipeline {
             steps {
                 sh '''
                 docker run --rm \
-                -v $WORKSPACE:/app \
+                -v /Users/sachijain/Desktop/handwritten-digit-recognition:/app \
                 -w /app \
                 python:3.10-slim \
-                bash -c "cd /app && ls && pip install -r requirements.txt && PYTHONPATH=. pytest -q"
+                bash -c "ls && pip install -r requirements.txt && PYTHONPATH=. pytest -q"
                 '''
             }
         }
