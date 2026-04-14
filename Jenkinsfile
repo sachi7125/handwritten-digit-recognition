@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh '''
                 docker run --rm \
-                -v $(pwd):/app \
+                -v $WORKSPACE:/app \
                 -w /app \
                 python:3.10-slim \
                 sh -c "pip install -r requirements.txt && PYTHONPATH=. pytest -q"
