@@ -9,7 +9,7 @@ pipeline {
                 -v $WORKSPACE:/app \
                 -w /app \
                 python:3.10-slim \
-                bash -c "pip install -r requirements.txt && PYTHONPATH=. pytest -q"
+                bash -c "cd /app && ls && pip install -r requirements.txt && PYTHONPATH=. pytest -q"
                 '''
             }
         }
