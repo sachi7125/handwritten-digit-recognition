@@ -1,22 +1,20 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.10-slim'
+        }
+    }
 
     stages {
-        stage('Install & Test') {
+        stage('Install') {
             steps {
-                sh '''
-                docker run --rm \
-                -v $(pwd):/app \
-                -w /app \
-                python:3.10-slim \
-                sh -c "pip install -r requirements.txt && PYTHONPATH=. pytest -q"
-                '''
+                sh 'pip install -r requirements.txt'
             }
         }
 
-        stage('Build Docker') {
+        stage('Test') {
             steps {
-                sh 'docker build -t digit-recognizer .'
+                sh 'PYTHONPATH=. pytest -q'
             }
         }
     }
