@@ -5,16 +5,19 @@ pipeline {
         stage('Install') {
             steps {
                 sh '''
-                apt-get update
-                apt-get install -y python3-pip
-                pip3 install -r requirements.txt
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'PYTHONPATH=. pytest -q'
+                sh '''
+                . venv/bin/activate
+                PYTHONPATH=. pytest -q
+                '''
             }
         }
     }
