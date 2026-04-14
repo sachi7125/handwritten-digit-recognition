@@ -4,9 +4,11 @@ pipeline {
     stages {
         stage('Test in Python Container') {
             steps {
+                writeFile file: 'run_tests.sh', text: '''#!/bin/sh
+pip install -r requirements.txt
+PYTHONPATH=. pytest -q
+'''
                 sh '''
-                echo "pip install -r requirements.txt" > run_tests.sh
-                echo "PYTHONPATH=. pytest -q" >> run_tests.sh
                 chmod +x run_tests.sh
 
                 docker run --rm \
